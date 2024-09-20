@@ -42,6 +42,8 @@ fun main() {
         Triple("Anne Ndam", 78901, 5200.0) // Consommation anormale
     )
 
+    // 
+
     // Liste pour stocker les consommations
     val consommations = mutableListOf<Double?>()
 
