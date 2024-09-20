@@ -1,7 +1,13 @@
 import java.util.InputMismatchException
 import java.util.Scanner
 
-fun calculatebill(consum: Double) = if (consum>1000) 0.9*consum*50 else consum*50
+
+class Client(val name: String,val meterNumber: String, val consumption: Double){
+    fun calculatebill() = if (consumption>1000) 0.9*consumption*50 else consumption*50
+
+    val bill = calculatebill()
+
+}
 
 fun main(){
     println("Bienvenue a l'application de facturation d'electricite\n")
@@ -11,8 +17,8 @@ fun main(){
     var name: String
     var meterNumber: String
     var consumption = 0.0
-    var bill: Double
-    var bills: MutableList<Double> = mutableListOf()
+    var currentClient: Client
+    var clients: MutableList<Client> = mutableListOf()
     var answer = ""
     var sum=0.0
     var average: Double
@@ -40,14 +46,14 @@ fun main(){
                 println()
             }
         }
-
+        currentClient = Client(name,meterNumber,consumption)
+        clients.add(currentClient)
 
         println("Hello, $name")
         println("Your meter number is $meterNumber and your consumption is $consumption kWh")
 
-        bill = calculatebill(consumption)
-        println("Hence, your bill is $bill\n")
-        bills.add(bill)
+        println("Hence, your bill is ${currentClient.bill}\n")
+//        bills.add(bill)
 
         print("Is there another Client? (Y/N)\t")
         answer = reader.nextLine()
@@ -60,10 +66,10 @@ fun main(){
         if (answer=="n" || answer=="N") nextClient=false
     }
 
-    for (b in bills){
-        sum+=b
+    for (client in clients){
+        sum+=client.bill
     }
-    average = sum/bills.size
+    average = sum/clients.size
     println("\nYour average consumption is $average")
 
 
