@@ -1,3 +1,4 @@
+import java.util.InputMismatchException
 import java.util.Scanner
 
 fun calculatebill(consum: Double) = if (consum>1000) 0.9*consum*50 else consum*50
@@ -8,7 +9,7 @@ fun main(){
     val reader = Scanner(System.`in`)
     var nextClient = true
     var name: String
-    var meterNumber: Long
+    var meterNumber: String
     var consumption = 0.0
     var bill: Double
     var bills: MutableList<Double> = mutableListOf()
@@ -22,7 +23,7 @@ fun main(){
         println()
 
         print("What's your meter number?\t")
-        meterNumber = reader.nextLong()
+        meterNumber = reader.nextLine()
         println()
 
         try {
@@ -63,7 +64,7 @@ fun main(){
         sum+=b
     }
     average = sum/bills.size
-    println(average)
+    println("\nYour average consumption is $average")
 
 
 
